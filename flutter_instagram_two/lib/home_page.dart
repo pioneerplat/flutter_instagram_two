@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_two/feed_screen.dart';
 
-class homaPage extends StatefulWidget {
-  homaPage({
+class HomaPage extends StatefulWidget {
+  HomaPage({
     Key key,
   }) : super(key: key);
 
   @override
-  _homaPageState createState() => _homaPageState();
+  _HomaPageState createState() => _HomaPageState();
 }
 
-class _homaPageState extends State<homaPage> {
+class _HomaPageState extends State<HomaPage> {
 
 
 
