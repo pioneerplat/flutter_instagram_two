@@ -23,12 +23,22 @@ class _homaPageState extends State<homaPage> {
 
   int _selectedIndex = 0;
 
+  //static 상수선언, static은 호출 전까지 초기화 되지 않음
+  static List<Widget> _screens = [
+    Container(color: Colors.grey,),
+    Container(color: Colors.blue,),
+    Container(color: Colors.green,),
+    Container(color: Colors.yellow,),
+    Container(color: Colors.red,)
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-          body: Container(
-            color: Colors.amber,
+          body: IndexedStack(
+            index: _selectedIndex,
+            children: _screens,
           ),
           bottomNavigationBar: BottomNavigationBar(
             onTap: _onBtmItemClick,
