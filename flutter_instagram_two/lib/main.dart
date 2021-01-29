@@ -12,6 +12,9 @@ class MyApp extends StatelessWidget {
       appBar: AppBar(
         title: Text('cool app'),
       ),
+          body: Container(
+            color: Colors.amber,
+          ),
     ));
   }
 }
