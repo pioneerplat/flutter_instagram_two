@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram_two/feed_screen.dart';
 
 class homaPage extends StatefulWidget {
   homaPage({
@@ -25,7 +26,7 @@ class _homaPageState extends State<homaPage> {
 
   //static 상수선언, static은 호출 전까지 초기화 되지 않음
   static List<Widget> _screens = [
-    Container(color: Colors.grey,),
+    FeedScreen(),
     Container(color: Colors.blue,),
     Container(color: Colors.green,),
     Container(color: Colors.yellow,),
