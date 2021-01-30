@@ -22,13 +22,42 @@ class Post extends StatelessWidget {
       children: [
         _postHeader(),
         _postImage(),
+        _postAction()
       ],
     );
   }
 
+  Row _postAction() {
+    return Row(
+        children: <Widget>[
+          IconButton(
+            onPressed: null,
+            icon: ImageIcon(AssetImage('assets/images/bookmark.png')),
+            color: Colors.black87,
+          ),
+          IconButton(
+            onPressed: null,
+            icon: ImageIcon(AssetImage('assets/images/comment.png')),
+            color: Colors.black87,
+          ),
+          IconButton(
+            onPressed: null,
+            icon: ImageIcon(AssetImage('assets/images/direct_message.png')),
+            color: Colors.black87,
+          ),
+          Spacer(),
+          IconButton(
+            onPressed: null,
+            icon: ImageIcon(AssetImage('assets/images/heart_selected.png')),
+            color: Colors.black,
+          ),
+        ],
+      );
+  }
+
   Widget _postHeader() {
     return Row(
-      children: <Widget> [
+      children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(common_xxs_gap),
           child: RoundedAvatar(),
@@ -65,5 +94,3 @@ class Post extends StatelessWidget {
     );
   }
 }
-
-
