@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram_two/widgets/post.dart';
 
 class FeedScreen extends StatelessWidget {
   @override
@@ -27,6 +28,13 @@ class FeedScreen extends StatelessWidget {
                 AssetImage('assets/images/actionbar_camera.png'),
                 color: Colors.black87,
               ),
+            ),
+            IconButton(
+              onPressed: null,
+              icon: ImageIcon(
+                AssetImage('assets/images/actionbar_camera.png'),
+                color: Colors.black87,
+              ),
             )
           ],
         ),
@@ -40,8 +48,5 @@ class FeedScreen extends StatelessWidget {
 }
 
 Widget feedListBuilder(BuildContext context, int index) {
-  return Container(
-    color: Colors.accents[index % Colors.accents.length],
-    height: 100,
-  );
+  return Post(index);
 }
