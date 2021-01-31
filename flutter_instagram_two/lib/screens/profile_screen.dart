@@ -10,16 +10,38 @@ class ProfileScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _appbar(),
-            _username(),
-            Text('bio form User. So Say something.'),
-            FlatButton(
-                onPressed: null,
-                child: Text(
-                  'Edit Profile',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ))
+            CustomScrollView(
+              slivers: [
+                SliverList(
+                    delegate: SliverChildListDelegate([
+                  _username(),
+                  _userBio(),
+                  _editProfileBtn(),
+                ]))
+              ],
+            )
           ],
         ),
+      ),
+    );
+  }
+
+  Padding _editProfileBtn() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: common_gap),
+      child: SizedBox(
+        height: 24,
+        child: OutlineButton(
+            onPressed: null,
+            borderSide: BorderSide(
+              color: Colors.black38,
+            ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+            child: Text(
+              'Edit Profile',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            )),
       ),
     );
   }
@@ -28,9 +50,19 @@ class ProfileScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: common_gap),
       child: Text(
-              'User Real Name',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+        'username',
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  Widget _userBio() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: common_gap),
+      child: Text(
+        'this is what I believe!!',
+        style: TextStyle(fontWeight: FontWeight.w400),
+      ),
     );
   }
 
