@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_two/feed_screen.dart';
+import 'package:flutter_instagram_two/screens/profile_screen.dart';
 
 class HomaPage extends StatefulWidget {
   HomaPage({
@@ -30,7 +31,7 @@ class _HomaPageState extends State<HomaPage> {
     Container(color: Colors.blue,),
     Container(color: Colors.green,),
     Container(color: Colors.yellow,),
-    Container(color: Colors.red,)
+    ProfileScreen(),
   ];
 
   @override

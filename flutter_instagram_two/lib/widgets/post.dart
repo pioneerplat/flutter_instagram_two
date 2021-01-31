@@ -90,7 +90,7 @@ class Post extends StatelessWidget {
   //이미지를 핸드폰에 저장해 놓고 다른화면에 갔다가 다시 왔을때 저장한 이미지를 사용
   CachedNetworkImage _postImage() {
     return CachedNetworkImage(
-      imageUrl: 'https://picsum.photos/id/$index/200/200',
+      imageUrl: 'https://picsum.photos/id/$index/1000/1000',
       placeholder: (BuildContext context, String url) {
         return MyProgressIndicator(containerSize: size.width);
       },
