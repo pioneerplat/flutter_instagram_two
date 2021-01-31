@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram_two/constants/screen_size.dart';
 import 'package:flutter_instagram_two/feed_screen.dart';
 import 'package:flutter_instagram_two/screens/profile_screen.dart';
 
@@ -36,6 +37,7 @@ class _HomaPageState extends State<HomaPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (size == null) size = MediaQuery.of(context).size;
     return MaterialApp(
         home: Scaffold(
           body: IndexedStack(
