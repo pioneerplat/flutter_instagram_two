@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_two/constants/common_size.dart';
+import 'package:flutter_instagram_two/constants/screen_size.dart';
 import 'package:flutter_instagram_two/widgets/comment.dart';
 import 'package:flutter_instagram_two/widgets/my_progress_indicator.dart';
 import 'package:flutter_instagram_two/widgets/rounded_Avatar.dart';
 
 class Post extends StatelessWidget {
   final int index;
-  Size size;
 
   Post(
     this.index, {

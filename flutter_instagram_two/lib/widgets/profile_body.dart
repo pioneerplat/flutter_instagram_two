@@ -8,7 +8,7 @@ class ProfileBody extends StatefulWidget {
 }
 
 class _ProfileBodyState extends State<ProfileBody> {
-  bool selectedLeft = true;
+  SelectedTab _selectedTab = SelectedTab.letf;
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +27,13 @@ class _ProfileBodyState extends State<ProfileBody> {
       ),
     );
   }
-
   Widget _selectedIndicator() {
     return Stack(
       children: [
         AnimatedContainer(
             duration: Duration(milliseconds: 300),
             alignment:
-                selectedLeft ? Alignment.centerLeft : Alignment.centerRight,
+                _selectedTab == SelectedTab.letf ? Alignment.centerLeft : Alignment.centerRight,
             curve: Curves.fastOutSlowIn,
             child: Container(
               height: 3,
@@ -51,20 +50,20 @@ class _ProfileBodyState extends State<ProfileBody> {
         Expanded(
           child: IconButton(
               icon: ImageIcon(AssetImage('assets/images/grid.png')),
-              color: selectedLeft ? Colors.black : Colors.black26,
+              color: _selectedTab == SelectedTab.letf ? Colors.black : Colors.black26,
               onPressed: () {
                 setState(() {
-                  selectedLeft = true;
+                  _selectedTab = SelectedTab.letf;
                 });
               }),
         ),
         Expanded(
           child: IconButton(
               icon: ImageIcon(AssetImage('assets/images/saved.png')),
-              color: selectedLeft ? Colors.black26 : Colors.black,
+              color: _selectedTab == SelectedTab.letf ? Colors.black26 : Colors.black,
               onPressed: () {
                 setState(() {
-                  selectedLeft = false;
+                  _selectedTab = SelectedTab.right;
                 });
               }),
         ),
@@ -110,4 +109,9 @@ class _ProfileBodyState extends State<ProfileBody> {
       ),
     );
   }
+
+}
+
+enum SelectedTab {
+  letf, right
 }
