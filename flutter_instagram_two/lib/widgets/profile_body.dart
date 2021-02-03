@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_two/constants/common_size.dart';
 import 'package:flutter_instagram_two/constants/screen_size.dart';
+import 'package:flutter_instagram_two/widgets/rounded_Avatar.dart';
 
 class ProfileBody extends StatefulWidget {
   @override
@@ -20,6 +21,35 @@ class _ProfileBodyState extends State<ProfileBody> {
         slivers: [
           SliverList(
             delegate: SliverChildListDelegate([
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(common_gap),
+                    child: RoundedAvatar(
+                      size: 80,
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: common_gap),
+                      child: Table(
+                        children: [
+                          TableRow(children: [
+                            _valueText('111'),
+                            _valueText('222'),
+                            _valueText('333'),
+                          ]),
+                          TableRow(children: [
+                            _labelText('Post'),
+                            _labelText('Followers'),
+                            _labelText('Following'),
+                          ]),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
               _username(),
               _userBio(),
               _editProfileBtn(),
@@ -32,6 +62,18 @@ class _ProfileBodyState extends State<ProfileBody> {
       ),
     );
   }
+
+  Text _valueText(String value) => Text(
+        value,
+        textAlign: TextAlign.center,
+        style: TextStyle(fontWeight: FontWeight.bold),
+      );
+
+  Text _labelText(String label) => Text(
+        label,
+        textAlign: TextAlign.center,
+        style: TextStyle(fontWeight: FontWeight.w300, fontSize: 11),
+      );
 
   SliverToBoxAdapter _imagePager() {
     return SliverToBoxAdapter(
@@ -54,23 +96,21 @@ class _ProfileBodyState extends State<ProfileBody> {
     );
   }
 
-
-
   GridView _images() {
     return GridView.count(
-            crossAxisCount: 3,
-            shrinkWrap: true,
-            childAspectRatio: 1,
-            physics: NeverScrollableScrollPhysics(),
-            children: List.generate(
-              30,
-              (index) {
-                return CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    imageUrl: 'https://picsum.photos/id/$index/100/100');
-              },
-            ),
-          );
+      crossAxisCount: 3,
+      shrinkWrap: true,
+      childAspectRatio: 1,
+      physics: NeverScrollableScrollPhysics(),
+      children: List.generate(
+        30,
+        (index) {
+          return CachedNetworkImage(
+              fit: BoxFit.cover,
+              imageUrl: 'https://picsum.photos/id/$index/100/100');
+        },
+      ),
+    );
   }
 
   Widget _selectedIndicator() {
@@ -118,9 +158,9 @@ class _ProfileBodyState extends State<ProfileBody> {
     );
   }
 
-  _tabSelected(SelectedTab selectedTab){
+  _tabSelected(SelectedTab selectedTab) {
     setState(() {
-      switch(selectedTab){
+      switch (selectedTab) {
         case SelectedTab.letf:
           _selectedTab = SelectedTab.letf;
           _leftImagesPageMargin = 0;
