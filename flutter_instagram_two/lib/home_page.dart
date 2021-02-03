@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_two/constants/screen_size.dart';
-import 'package:flutter_instagram_two/feed_screen.dart';
+import 'package:flutter_instagram_two/screens/feed_screen.dart';
 import 'package:flutter_instagram_two/screens/profile_screen.dart';
 
 class HomaPage extends StatefulWidget {

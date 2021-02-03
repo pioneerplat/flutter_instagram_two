@@ -5,6 +5,9 @@ import 'package:flutter_instagram_two/constants/screen_size.dart';
 import 'package:flutter_instagram_two/widgets/rounded_Avatar.dart';
 
 class ProfileBody extends StatefulWidget {
+  final Function onMenuChanged; // function을 외부에서 받아오고 싶을
+
+  const ProfileBody({Key key, this.onMenuChanged}) : super(key: key);
   @override
   _ProfileBodyState createState() => _ProfileBodyState();
 }
@@ -16,50 +19,78 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: CustomScrollView(
-        slivers: [
-          SliverList(
-            delegate: SliverChildListDelegate([
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(common_gap),
-                    child: RoundedAvatar(
-                      size: 80,
+    return SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _appbar(),
+          Expanded(
+            child: CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(common_gap),
+                          child: RoundedAvatar(
+                            size: 80,
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: common_gap),
+                            child: Table(
+                              children: [
+                                TableRow(children: [
+                                  _valueText('111'),
+                                  _valueText('222'),
+                                  _valueText('333'),
+                                ]),
+                                TableRow(children: [
+                                  _labelText('Post'),
+                                  _labelText('Followers'),
+                                  _labelText('Following'),
+                                ]),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: common_gap),
-                      child: Table(
-                        children: [
-                          TableRow(children: [
-                            _valueText('111'),
-                            _valueText('222'),
-                            _valueText('333'),
-                          ]),
-                          TableRow(children: [
-                            _labelText('Post'),
-                            _labelText('Followers'),
-                            _labelText('Following'),
-                          ]),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              _username(),
-              _userBio(),
-              _editProfileBtn(),
-              _tabButtons(),
-              _selectedIndicator(),
-            ]),
+                    _username(),
+                    _userBio(),
+                    _editProfileBtn(),
+                    _tabButtons(),
+                    _selectedIndicator(),
+                  ]),
+                ),
+                _imagePager(),
+              ],
+            ),
           ),
-          _imagePager(),
         ],
       ),
+    );
+  }
+
+  Row _appbar() {
+    return Row(
+      children: [
+        SizedBox(
+          width: 44,
+        ),
+        Expanded(
+            child: Text(
+              'Jang Woo Kun',
+              textAlign: TextAlign.center,
+            )),
+        IconButton(
+          icon: Icon(Icons.menu),
+          //클릭이 될때마다 외부에서 받아온 functiond을 트리거한다
+          onPressed: widget.onMenuChanged,
+        )
+      ],
     );
   }
 
