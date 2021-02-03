@@ -9,14 +9,30 @@ class ProfileBody extends StatefulWidget {
   final Function onMenuChanged; // function을 외부에서 받아오고 싶을
 
   const ProfileBody({Key key, this.onMenuChanged}) : super(key: key);
+
   @override
   _ProfileBodyState createState() => _ProfileBodyState();
 }
 
-class _ProfileBodyState extends State<ProfileBody> {
+class _ProfileBodyState extends State<ProfileBody>
+    with SingleTickerProviderStateMixin {
   SelectedTab _selectedTab = SelectedTab.letf;
   double _leftImagesPageMargin = 0;
   double _rightImagesPageMargin = size.width;
+  AnimationController _iconAnimationController;
+
+  @override
+  void initState() {
+    _iconAnimationController =
+        AnimationController(vsync: this, duration: duration);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _iconAnimationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,21 +103,31 @@ class _ProfileBodyState extends State<ProfileBody> {
               textAlign: TextAlign.center,
             )),
         IconButton(
-          icon: Icon(Icons.menu),
-          //클릭이 될때마다 외부에서 받아온 functiond을 트리거한다
-          onPressed: widget.onMenuChanged,
+            icon: AnimatedIcon(icon: AnimatedIcons.menu_close,
+              progress: _iconAnimationController,),
+            //클릭이 될때마다 외부에서 받아온 functiond을 트리거한다
+            onPressed: () {
+              widget.onMenuChanged();
+              //끝에있으면 시작지점으로 보내주고 시작에있으면 끝으로 보내준다
+              _iconAnimationController.status == AnimationStatus.completed
+                  ? _iconAnimationController.reverse()
+                  : _iconAnimationController.forward();
+            }
+
         )
       ],
     );
   }
 
-  Text _valueText(String value) => Text(
+  Text _valueText(String value) =>
+      Text(
         value,
         textAlign: TextAlign.center,
         style: TextStyle(fontWeight: FontWeight.bold),
       );
 
-  Text _labelText(String label) => Text(
+  Text _labelText(String label) =>
+      Text(
         label,
         textAlign: TextAlign.center,
         style: TextStyle(fontWeight: FontWeight.w300, fontSize: 11),
@@ -136,7 +162,7 @@ class _ProfileBodyState extends State<ProfileBody> {
       physics: NeverScrollableScrollPhysics(),
       children: List.generate(
         30,
-        (index) {
+            (index) {
           return CachedNetworkImage(
               fit: BoxFit.cover,
               imageUrl: 'https://picsum.photos/id/$index/100/100');
@@ -217,7 +243,7 @@ class _ProfileBodyState extends State<ProfileBody> {
             onPressed: () {},
             borderSide: BorderSide(color: Colors.black45),
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
             child: Text(
               'Edit Profile',
               style: TextStyle(fontWeight: FontWeight.bold),

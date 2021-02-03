@@ -49,6 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
             ),
           ),
+          //굳이 Positioned 할 필요가 없음 없애줘도 무방하다
           Positioned(
             width: menuWidth,
             top: 0,
