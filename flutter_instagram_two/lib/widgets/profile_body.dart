@@ -10,6 +10,8 @@ class ProfileBody extends StatefulWidget {
 
 class _ProfileBodyState extends State<ProfileBody> {
   SelectedTab _selectedTab = SelectedTab.letf;
+  double _leftImagesPageMargin = 0;
+  double _rightImagesPageMargin = size.width;
 
   @override
   Widget build(BuildContext context) {
@@ -25,25 +27,48 @@ class _ProfileBodyState extends State<ProfileBody> {
               _selectedIndicator(),
             ]),
           ),
-          SliverToBoxAdapter(
-            child: GridView.count(
-              crossAxisCount: 3,
-              shrinkWrap: true,
-              childAspectRatio: 1,
-              physics: NeverScrollableScrollPhysics(),
-              children: List.generate(
-                30,
-                (index) {
-                  return CachedNetworkImage(
-                      fit: BoxFit.cover,
-                      imageUrl: 'https://picsum.photos/id/$index/100/100');
-                },
-              ),
-            ),
+          _imagePager(),
+        ],
+      ),
+    );
+  }
+
+  SliverToBoxAdapter _imagePager() {
+    return SliverToBoxAdapter(
+      child: Stack(
+        children: [
+          AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            transform: Matrix4.translationValues(_leftImagesPageMargin, 0, 0),
+            curve: Curves.fastOutSlowIn,
+            child: _images(),
+          ),
+          AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            transform: Matrix4.translationValues(_rightImagesPageMargin, 0, 0),
+            curve: Curves.fastOutSlowIn,
+            child: _images(),
           ),
         ],
       ),
     );
+  }
+
+  GridView _images() {
+    return GridView.count(
+            crossAxisCount: 3,
+            shrinkWrap: true,
+            childAspectRatio: 1,
+            physics: NeverScrollableScrollPhysics(),
+            children: List.generate(
+              30,
+              (index) {
+                return CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: 'https://picsum.photos/id/$index/100/100');
+              },
+            ),
+          );
   }
 
   Widget _selectedIndicator() {
@@ -76,6 +101,8 @@ class _ProfileBodyState extends State<ProfileBody> {
               onPressed: () {
                 setState(() {
                   _selectedTab = SelectedTab.letf;
+                  _leftImagesPageMargin = 0;
+                  _rightImagesPageMargin = size.width;
                 });
               }),
         ),
@@ -88,6 +115,8 @@ class _ProfileBodyState extends State<ProfileBody> {
               onPressed: () {
                 setState(() {
                   _selectedTab = SelectedTab.right;
+                  _leftImagesPageMargin = -size.width;
+                  _rightImagesPageMargin = 0;
                 });
               }),
         ),
