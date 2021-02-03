@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_two/constants/common_size.dart';
 import 'package:flutter_instagram_two/constants/screen_size.dart';
@@ -16,24 +17,43 @@ class _ProfileBodyState extends State<ProfileBody> {
       child: CustomScrollView(
         slivers: [
           SliverList(
-              delegate: SliverChildListDelegate([
-            _username(),
-            _userBio(),
-            _editProfileBtn(),
-            _tabButtons(),
-            _selectedIndicator(),
-          ]))
+            delegate: SliverChildListDelegate([
+              _username(),
+              _userBio(),
+              _editProfileBtn(),
+              _tabButtons(),
+              _selectedIndicator(),
+            ]),
+          ),
+          SliverToBoxAdapter(
+            child: GridView.count(
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              childAspectRatio: 1,
+              physics: NeverScrollableScrollPhysics(),
+              children: List.generate(
+                30,
+                (index) {
+                  return CachedNetworkImage(
+                      fit: BoxFit.cover,
+                      imageUrl: 'https://picsum.photos/id/$index/100/100');
+                },
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
+
   Widget _selectedIndicator() {
     return Stack(
       children: [
         AnimatedContainer(
             duration: Duration(milliseconds: 300),
-            alignment:
-                _selectedTab == SelectedTab.letf ? Alignment.centerLeft : Alignment.centerRight,
+            alignment: _selectedTab == SelectedTab.letf
+                ? Alignment.centerLeft
+                : Alignment.centerRight,
             curve: Curves.fastOutSlowIn,
             child: Container(
               height: 3,
@@ -50,7 +70,9 @@ class _ProfileBodyState extends State<ProfileBody> {
         Expanded(
           child: IconButton(
               icon: ImageIcon(AssetImage('assets/images/grid.png')),
-              color: _selectedTab == SelectedTab.letf ? Colors.black : Colors.black26,
+              color: _selectedTab == SelectedTab.letf
+                  ? Colors.black
+                  : Colors.black26,
               onPressed: () {
                 setState(() {
                   _selectedTab = SelectedTab.letf;
@@ -60,7 +82,9 @@ class _ProfileBodyState extends State<ProfileBody> {
         Expanded(
           child: IconButton(
               icon: ImageIcon(AssetImage('assets/images/saved.png')),
-              color: _selectedTab == SelectedTab.letf ? Colors.black26 : Colors.black,
+              color: _selectedTab == SelectedTab.letf
+                  ? Colors.black26
+                  : Colors.black,
               onPressed: () {
                 setState(() {
                   _selectedTab = SelectedTab.right;
@@ -109,9 +133,6 @@ class _ProfileBodyState extends State<ProfileBody> {
       ),
     );
   }
-
 }
 
-enum SelectedTab {
-  letf, right
-}
+enum SelectedTab { letf, right }
