@@ -21,7 +21,7 @@ class _FadeStackState extends State<FadeStack>
   @override
   void initState() {
     _animationController = AnimationController(vsync: this, duration: duration);
-    _animationController.forward();// 처음에 한번 forward를 해줘야 첫화면이 뜬다 
+    _animationController.forward();// 처음에 한번 forward를 해줘야 첫화면이 뜬다
     super.initState();
   }
 
