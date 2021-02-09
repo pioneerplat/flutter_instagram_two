@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram_two/constants/auth_input_decor.dart';
 import 'package:flutter_instagram_two/constants/common_size.dart';
 import 'package:flutter_instagram_two/home_page.dart';
+import 'package:flutter_instagram_two/widgets/or_divider.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -41,7 +43,7 @@ class _SignUpFormState extends State<SignUpForm> {
               TextFormField(
                 controller: _emailController,
                 cursorColor: Colors.black54,
-                decoration: _textInputDecor('Email'),
+                decoration: textInputDecor('Email'),
                 validator: (text) {
                   if (text.isNotEmpty && text.contains('@')) {
                     return null;
@@ -59,7 +61,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 cursorColor: Colors.black54,
                 //비밀번호 노출 금지
                 obscureText: true,
-                decoration: _textInputDecor('Password'),
+                decoration: textInputDecor('Password'),
                 validator: (text) {
                   if (text.isNotEmpty && text.length > 5) {
                     return null;
@@ -77,7 +79,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 cursorColor: Colors.black54,
                 //비밀번호 노출 금지
                 obscureText: true,
-                decoration: _textInputDecor('Confirm Password'),
+                decoration: textInputDecor('Confirm Password'),
                 validator: (text) {
                   if (text.isNotEmpty && _pwController.text == text) {
                     return null;
@@ -90,8 +92,7 @@ class _SignUpFormState extends State<SignUpForm> {
               SizedBox(height: common_s_gap),
               _submitButton(context),
               SizedBox(height: common_s_gap),
-
-              _orDivider(),
+              OrDivider(),
               FlatButton.icon(
                   onPressed: () {},
                   textColor: Colors.blue,
@@ -129,64 +130,7 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
             );
   }
-
-  Stack _orDivider() {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Positioned(
-          left: 0,
-          right: 0,
-          height: 1,
-          child: Container(
-            height: 1,
-            color: Colors.grey[300],
-          ),
-        ),
-        Container(
-          height: 3,
-          width: 60,
-          color: Colors.grey[50],
-        ),
-        Text(
-          'OR',
-          style:
-              TextStyle(color: Colors.grey[500], fontWeight: FontWeight.bold),
-        )
-      ],
-    );
-  }
-
-  InputDecoration _textInputDecor(String hint) {
-    return InputDecoration(
-        hintText: hint,
-        enabledBorder: _activeInputBorder(),
-        focusedBorder: _activeInputBorder(),
-
-        //error가 발생해도 폼스타일을 그대로 유지하기위해
-        errorBorder: errorInputBorder(),
-
-        //error가 발생한 필드를 클릭하면 보더가 바뀌는데 바뀌는걸 방지하기 위해 같은 스타일을 준다
-        focusedErrorBorder: errorInputBorder(),
-        filled: true,
-        fillColor: Colors.grey[100]);
-  }
-
-  OutlineInputBorder errorInputBorder() {
-    return OutlineInputBorder(
-      borderSide: BorderSide(
-        color: Colors.red,
-      ),
-      borderRadius: BorderRadius.circular(common_s_gap),
-    );
-  }
-
-  OutlineInputBorder _activeInputBorder() {
-    return OutlineInputBorder(
-      borderSide: BorderSide(
-        color: Colors.grey[200],
-      ),
-      borderRadius: BorderRadius.circular(common_s_gap),
-    );
-  }
 }
+
+
+
