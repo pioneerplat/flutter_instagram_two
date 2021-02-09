@@ -87,54 +87,73 @@ class _SignUpFormState extends State<SignUpForm> {
                 },
               ),
               //Join 버튼
-              FlatButton(
-                onPressed: () {
-                  //_formKey.currentState.validate();
-                  //form에 있는 각각의 validator들이 전부 null을 반환하면 true가 온다
-                  //false가 오면 각각의 validator의 else return값을 출력한다
-                  if (_formKey.currentState.validate()) {
-                    print('Validation success!!');
-                    //로그인이 성공했을 때 HomePage()로 이동한다
-                    //pushReplacement 현재화면을 없애고 이동
-                    //push 현재화면을 없애지 않고 뒤로보내고 이동
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => HomePage()));
-                  }
-                },
-                color: Colors.blue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Text(
-                  'Join',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
               SizedBox(height: common_s_gap),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    height: 1,
-                    child: Container(
-                      height: 1,
-                      color: Colors.grey[300],
-                    ),
-                  ),
-                  Container(
-                    height: 3,
-                    width: 60,
-                    color: Colors.grey[50],
-                  ),
-                  Text('OR', style: TextStyle(color: Colors.grey[500], fontWeight: FontWeight.bold),)
-                ],
-              )
+              _submitButton(context),
+              SizedBox(height: common_s_gap),
+
+              _orDivider(),
+              FlatButton.icon(
+                  onPressed: () {},
+                  textColor: Colors.blue,
+                  icon: ImageIcon(AssetImage('assets/images/facebook.png')),
+                  label: Text('Login with Facebook'))
             ],
           ),
         ),
       ),
+    );
+  }
+
+  FlatButton _submitButton(BuildContext context) {
+    return FlatButton(
+              onPressed: () {
+                //_formKey.currentState.validate();
+                //form에 있는 각각의 validator들이 전부 null을 반환하면 true가 온다
+                //false가 오면 각각의 validator의 else return값을 출력한다
+                if (_formKey.currentState.validate()) {
+                  print('Validation success!!');
+                  //로그인이 성공했을 때 HomePage()로 이동한다
+                  //pushReplacement 현재화면을 없애고 이동
+                  //push 현재화면을 없애지 않고 뒤로보내고 이동
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                }
+              },
+              color: Colors.blue,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Text(
+                'Join',
+                style: TextStyle(color: Colors.white),
+              ),
+            );
+  }
+
+  Stack _orDivider() {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Positioned(
+          left: 0,
+          right: 0,
+          height: 1,
+          child: Container(
+            height: 1,
+            color: Colors.grey[300],
+          ),
+        ),
+        Container(
+          height: 3,
+          width: 60,
+          color: Colors.grey[50],
+        ),
+        Text(
+          'OR',
+          style:
+              TextStyle(color: Colors.grey[500], fontWeight: FontWeight.bold),
+        )
+      ],
     );
   }
 
