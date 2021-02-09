@@ -16,6 +16,8 @@ class _AuthScreenState extends State<AuthScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //키보드가 올라와도 해당화면이 줄어드는걸 방지할 수 있다.
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Stack(
           children: [
