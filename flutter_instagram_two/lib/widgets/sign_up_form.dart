@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_two/constants/common_size.dart';
+import 'package:flutter_instagram_two/home_page.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -36,6 +37,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 height: common_l_gap,
               ),
               Image.asset('assets/images/insta_text_logo.png'),
+              //이메일 입력칸
               TextFormField(
                 controller: _emailController,
                 cursorColor: Colors.black54,
@@ -51,6 +53,7 @@ class _SignUpFormState extends State<SignUpForm> {
               SizedBox(
                 height: common_xs_gap,
               ),
+              //비밀번호 입력칸
               TextFormField(
                 controller: _pwController,
                 cursorColor: Colors.black54,
@@ -68,6 +71,7 @@ class _SignUpFormState extends State<SignUpForm> {
               SizedBox(
                 height: common_xs_gap,
               ),
+              //비밀번호 확인칸
               TextFormField(
                 controller: _cpwController,
                 cursorColor: Colors.black54,
@@ -82,13 +86,19 @@ class _SignUpFormState extends State<SignUpForm> {
                   }
                 },
               ),
+              //Join 버튼
               FlatButton(
                 onPressed: () {
                   //_formKey.currentState.validate();
                   //form에 있는 각각의 validator들이 전부 null을 반환하면 true가 온다
                   //false가 오면 각각의 validator의 else return값을 출력한다
-                  if(_formKey.currentState.validate()){
+                  if (_formKey.currentState.validate()) {
                     print('Validation success!!');
+                    //로그인이 성공했을 때 HomePage()로 이동한다
+                    //pushReplacement 현재화면을 없애고 이동
+                    //push 현재화면을 없애지 않고 뒤로보내고 이동
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context)=>HomePage()));
                   }
                 },
                 color: Colors.blue,
@@ -124,19 +134,19 @@ class _SignUpFormState extends State<SignUpForm> {
 
   OutlineInputBorder errorInputBorder() {
     return OutlineInputBorder(
-        borderSide: BorderSide(
-          color: Colors.red,
-        ),
-        borderRadius: BorderRadius.circular(common_s_gap),
-      );
+      borderSide: BorderSide(
+        color: Colors.red,
+      ),
+      borderRadius: BorderRadius.circular(common_s_gap),
+    );
   }
 
   OutlineInputBorder _activeInputBorder() {
     return OutlineInputBorder(
-        borderSide: BorderSide(
-          color: Colors.grey[200],
-        ),
-        borderRadius: BorderRadius.circular(common_s_gap),
-      );
+      borderSide: BorderSide(
+        color: Colors.grey[200],
+      ),
+      borderRadius: BorderRadius.circular(common_s_gap),
+    );
   }
 }

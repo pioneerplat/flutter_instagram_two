@@ -3,16 +3,16 @@ import 'package:flutter_instagram_two/constants/screen_size.dart';
 import 'package:flutter_instagram_two/screens/feed_screen.dart';
 import 'package:flutter_instagram_two/screens/profile_screen.dart';
 
-class HomaPage extends StatefulWidget {
-  HomaPage({
+class HomePage extends StatefulWidget {
+  HomePage({
     Key key,
   }) : super(key: key);
 
   @override
-  _HomaPageState createState() => _HomaPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomaPageState extends State<HomaPage> {
+class _HomePageState extends State<HomePage> {
 
 
 
