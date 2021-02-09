@@ -25,7 +25,7 @@ class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // 키보드가 올라올때 화면에 가려진걸 볼 수 있게 하기위해 Scaffold로 감싸고 resizeToAvoidBottomInset: true 
+      // 키보드가 올라올때 화면에 가려진걸 볼 수 있게 하기위해 Scaffold로 감싸고 resizeToAvoidBottomInset: true
       resizeToAvoidBottomInset: true,
       body: Padding(
         padding: const EdgeInsets.all(common_gap),
@@ -98,7 +98,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     //pushReplacement 현재화면을 없애고 이동
                     //push 현재화면을 없애지 않고 뒤로보내고 이동
                     Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context)=>HomePage()));
+                        MaterialPageRoute(builder: (context) => HomePage()));
                   }
                 },
                 color: Colors.blue,
@@ -109,6 +109,27 @@ class _SignUpFormState extends State<SignUpForm> {
                   'Join',
                   style: TextStyle(color: Colors.white),
                 ),
+              ),
+              SizedBox(height: common_s_gap),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    height: 1,
+                    child: Container(
+                      height: 1,
+                      color: Colors.grey[300],
+                    ),
+                  ),
+                  Container(
+                    height: 3,
+                    width: 60,
+                    color: Colors.grey[50],
+                  ),
+                  Text('OR', style: TextStyle(color: Colors.grey[500], fontWeight: FontWeight.bold),)
+                ],
               )
             ],
           ),
