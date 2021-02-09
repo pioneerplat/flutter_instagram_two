@@ -72,9 +72,15 @@ class _SignInFormState extends State<SignInForm> {
               SizedBox(
                 height: common_xs_gap,
               ),
+              FlatButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Forgotten Password',
+                    style: TextStyle(color: Colors.blue),
+                  )),
 
-              //Join 버튼
               SizedBox(height: common_s_gap),
+              // Sign In 버튼
               _submitButton(context),
               SizedBox(height: common_s_gap),
               OrDivider(),
