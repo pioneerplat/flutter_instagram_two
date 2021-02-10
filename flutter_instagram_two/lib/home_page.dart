@@ -67,13 +67,17 @@ class _HomePageState extends State<HomePage> {
     // 새로운 창을 띄우는 방법 push 는 해당창을 없애지 않고 뒤로 보내고 새로운 창을 띄운다
     switch (index) {
       case 2:
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => CameraScreen()));
+        _openCamera();
         break;
       default:
         setState(() {
           _selectedIndex = index;
         });
     }
+  }
+
+  void _openCamera() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => CameraScreen()));
   }
 }
