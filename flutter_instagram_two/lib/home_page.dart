@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
   int _selectedIndex = 0;
+  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   //static 상수선언, static은 호출 전까지 초기화 되지 않음
   static List<Widget> _screens = [
@@ -45,6 +46,7 @@ class _HomePageState extends State<HomePage> {
     if (size == null) size = MediaQuery.of(context).size;
     return MaterialApp(
         home: Scaffold(
+          key: _key,
       body: IndexedStack(
         index: _selectedIndex,
         children: _screens,
@@ -88,13 +90,15 @@ class _HomePageState extends State<HomePage> {
           label: 'OK',
           onPressed: () {
             //스낵바 없애기
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            //ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            ScaffoldMessenger.of(_key.currentContext).hideCurrentSnackBar();
           },
         ),
       );
       //아래것으로 바뀜
       //Scaffold.of(context).showSnackBar(snackbar);
-      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+      //ScaffoldMessenger.of(context).showSnackBar(snackbar);
+      ScaffoldMessenger.of(_key.currentContext).showSnackBar(snackbar);
     }
   }
 
