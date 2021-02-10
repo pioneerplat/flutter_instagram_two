@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_two/constants/screen_size.dart';
 import 'package:flutter_instagram_two/screens/camera_screen.dart';
@@ -92,6 +93,9 @@ class _HomePageState extends State<HomePage> {
             //스낵바 없애기
             //ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(_key.currentContext).hideCurrentSnackBar();
+
+            //셋팅페이지로 가서 permission을 셋팅할 수 있도록 한다
+            AppSettings.openAppSettings();
           },
         ),
       );
