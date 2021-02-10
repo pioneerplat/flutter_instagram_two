@@ -6,9 +6,9 @@ class CameraScreen extends StatefulWidget {
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-
-  int _currentIndex = 0;
-  PageController _pageController = PageController();
+  int _currentIndex = 1;
+  String _title = 'PHOTO';
+  PageController _pageController = PageController(initialPage: 1);
 
   @override
   void dispose() {
@@ -19,29 +19,49 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(_title),
+      ),
       body: PageView(
         controller: _pageController,
         children: [
-          Container(color: Colors.green,),
-          Container(color: Colors.blue,),
-          Container(color: Colors.red,),
+          Container(
+            color: Colors.green,
+          ),
+          Container(
+            color: Colors.blue,
+          ),
+          Container(
+            color: Colors.red,
+          ),
         ],
-        onPageChanged: (index){
+        onPageChanged: (index) {
           setState(() {
             _currentIndex = index;
+            switch (_currentIndex) {
+              case 0:
+                _title = 'GALLERY';
+                break;
+              case 1:
+                _title = 'PHOTO';
+                break;
+              case 2:
+                _title = 'VIDEO';
+                break;
+            }
           });
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
-          iconSize: 0,
-          selectedItemColor: Colors.black87,
-          unselectedItemColor: Colors.black54,
-          selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-          items: [
-        BottomNavigationBarItem(icon: Icon(Icons.add), label: 'GALLERY'),
-        BottomNavigationBarItem(icon: Icon(Icons.add), label: 'PHOTO'),
-        BottomNavigationBarItem(icon: Icon(Icons.add), label: 'VIDEO'),
-      ],
+        iconSize: 0,
+        selectedItemColor: Colors.black87,
+        unselectedItemColor: Colors.black54,
+        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.add), label: 'GALLERY'),
+          BottomNavigationBarItem(icon: Icon(Icons.add), label: 'PHOTO'),
+          BottomNavigationBarItem(icon: Icon(Icons.add), label: 'VIDEO'),
+        ],
         currentIndex: _currentIndex,
         onTap: _onItemTabbed,
       ),
@@ -49,9 +69,10 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 
   void _onItemTabbed(index) {
-      setState(() {
-        _currentIndex = index;
-        _pageController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.fastOutSlowIn);
-      });
+    setState(() {
+      _currentIndex = index;
+      _pageController.animateToPage(index,
+          duration: Duration(milliseconds: 300), curve: Curves.fastOutSlowIn);
+    });
   }
 }
