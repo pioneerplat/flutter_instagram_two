@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_two/constants/screen_size.dart';
 import 'package:flutter_instagram_two/widgets/my_progress_indicator.dart';
+import 'package:provider/provider.dart';
 
 class TakePhoto extends StatefulWidget {
   const TakePhoto({
@@ -24,11 +25,15 @@ class _TakePhotoState extends State<TakePhoto> {
       builder: (context, snapshot) {
         return Column(
           children: [
-            Container(
-              width: size.width,
-              height: size.width,
-              color: Colors.black,
-              child: (snapshot.hasData) ? _getPreview(snapshot.data) : _progress
+            //ChangeNotifierProvider로 감싼뒤 builder를 통해 내가 원하는 데이터 모델을 던져줄 수 있다
+            ChangeNotifierProvider(
+              builder: ,
+              child: Container(
+                width: size.width,
+                height: size.width,
+                color: Colors.black,
+                child: (snapshot.hasData) ? _getPreview(snapshot.data) : _progress
+              ),
             ),
             Expanded(
                 child: OutlineButton(
@@ -56,7 +61,7 @@ class _TakePhotoState extends State<TakePhoto> {
               //center에 맞게 정렬시키고 박스 바깥으로 나갈 수 있게 해준다
               alignment: Alignment.center,
               child: FittedBox(
-                //가로길이에 맞게끔 비율을 조절한다 
+                //가로길이에 맞게끔 비율을 조절한다
                 fit: BoxFit.fitWidth,
                 child: Container(
                   width: size.width,
