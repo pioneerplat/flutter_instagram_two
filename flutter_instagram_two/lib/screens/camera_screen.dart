@@ -28,7 +28,7 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      //MultiProvider를 정의해 두면 child: Scaffold 하위 위젯에서 다 사용할 수 있다.  
+      //MultiProvider를 정의해 두면 child: Scaffold 하위 위젯에서 다 사용할 수 있다.
       providers: [
         //value로 위젯에 정의해둔 CameraState를 가지고 옴
         // 이렇게 하는 이유는 위에서 getReadyToTakePhoto를 먼저 실행해주기 위해서
