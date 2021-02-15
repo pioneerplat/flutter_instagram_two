@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_two/models/camera_state.dart';
+import 'package:flutter_instagram_two/widgets/my_gallery.dart';
 import 'package:flutter_instagram_two/widgets/take_photo.dart';
 import 'package:provider/provider.dart';
 
@@ -45,9 +46,7 @@ class _CameraScreenState extends State<CameraScreen> {
         body: PageView(
           controller: _pageController,
           children: [
-            Container(
-              color: Colors.green,
-            ),
+            MyGallery(),
             TakePhoto(),
             Container(
               color: Colors.red,
