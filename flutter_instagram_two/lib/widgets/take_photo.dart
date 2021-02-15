@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_instagram_two/constants/screen_size.dart';
 import 'package:flutter_instagram_two/models/camera_state.dart';
 import 'package:flutter_instagram_two/widgets/my_progress_indicator.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 class TakePhoto extends StatefulWidget {
@@ -28,11 +30,16 @@ class _TakePhotoState extends State<TakePhoto> {
                 width: size.width,
                 height: size.width,
                 color: Colors.black,
-                child: (cameraState.isReadyToTakePhoto) ? _getPreview(cameraState) : _progress
+                child: (cameraState.isReadyToTakePhoto) ? _getPreview(
+                    cameraState) : _progress
             ),
             Expanded(
                 child: OutlineButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (cameraState.isReadyToTakePhoto) {
+                      _attemptTakePhoto()
+                    }
+                  },
                   shape: CircleBorder(),
                   borderSide: BorderSide(color: Colors.black12, width: 20),
                 )
@@ -63,5 +70,25 @@ class _TakePhotoState extends State<TakePhoto> {
         ),
       ),
     );
+  }
+
+  void _attemptTakePhoto(CameraState cameraState) async {
+    //이미지명으로 사용하기 위해
+    final String timeInMilli = DateTime
+        .now()
+        .millisecondsSinceEpoch
+        .toString();
+    try {
+      //.path를 하면 String으로 변환된다
+      //await getTemporaryDirectory()).path 저장되는 폴더 위치
+      //join은 String 을 합쳐주는 연산자 (path.dart)
+      final path = join(
+          (await getTemporaryDirectory()).path, '$timeInMilli.png');
+
+      //사진 찍기 (path 에다가 사진을 저장한다)
+      await cameraState.controller.takePicture(path);
+    } catch (e) {
+
+    }
   }
 }
