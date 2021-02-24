@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             //스낵바 없애기
             //ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            ScaffoldMessenger.of(_key.currentContext).hideCurrentSnackBar();
+            _key.currentState.hideCurrentSnackBar();
 
             //셋팅페이지로 가서 permission을 셋팅할 수 있도록 한다
             AppSettings.openAppSettings();
@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
       //아래것으로 바뀜
       //Scaffold.of(context).showSnackBar(snackbar);
       //ScaffoldMessenger.of(context).showSnackBar(snackbar);
-      ScaffoldMessenger.of(_key.currentContext).showSnackBar(snackbar);
+      _key.currentState.showSnackBar(snackbar);
     }
   }
 
